@@ -1,0 +1,32 @@
+
+!pip install tensorflow
+import tensorflow as tf
+from keras.models import sequential
+from keras.datasets import mnist
+import matplotlib.pyplot as plt
+import numpy as np
+import random
+
+(x_train,y_train),(x_test,y_test)=mnist.load_data()
+x_train=x_train/255
+x_test=x_test/255
+
+(x_train,y_train),(x_test,y_test)=mnist.load_data()
+x_train=x_train/255
+x_test=x_test/255
+
+model.compile(optimizer='sgd',loss='sparse_categorical_crossentropy',metrics=["Accuracy"])
+
+H=model.fit(x_train,y_train,validation_data=(x_test,y_test),epochs=5)
+
+test_loss,test_acc=model.evaluate(x_test,y_test)
+
+print("loss=%.3f"%test_loss)
+print("Acc=%.3f"%test_acc)
+
+n=random.randint(0,999)
+plt.imshow(x_test[n])
+plt.show()
+
+prediction=model.predict(x_test)
+print("Handwritten no in img is %d"%np.argmax(prediction[n]))
